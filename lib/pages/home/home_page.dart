@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.account_circle), label: 'Perfil')
     ];
     final List<Widget> _conteudo = [
-      AfazeresTab(valorInicial: 5, callback: updateIndex),
+      const AfazeresTab(),
+      // AfazeresTab(valorInicial: 5, callback: updateIndex),
       const PerfilTab(),
     ];
     return Scaffold(
