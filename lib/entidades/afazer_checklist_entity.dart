@@ -5,7 +5,7 @@ class AfazerCheckListEntity {
   final String titulo;
   final DateTime dataInicio;
   final DateTime dataFim;
-  final bool isConcluido;
+  final bool? isConcluido;
   final List<AfazerEntity?>? conteudo;
   String? image;
 
@@ -14,7 +14,7 @@ class AfazerCheckListEntity {
     required this.titulo,
     required this.dataInicio,
     required this.dataFim,
-    required this.isConcluido,
+    this.isConcluido,
     this.conteudo,
     this.image,
   });
