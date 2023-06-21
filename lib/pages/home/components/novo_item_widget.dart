@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:school/components/icon_button_component.dart';
 import 'package:school/components/spacer_component.dart';
-import 'package:school/entidades/afazer_checklist_entity.dart';
 import 'package:school/entidades/afazer_entity.dart';
+import 'package:school/entidades/afazer_checklist_entity.dart';
 
 class NovoItemWidget extends StatefulWidget {
-  final void Function(AfazerCheckListEntity item) callback;
+  final void Function(AfazerEntity item) callback;
 
   const NovoItemWidget({
     super.key,
@@ -23,6 +23,7 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
   final _formKeyTarefas = GlobalKey<FormState>();
 
   final _titleController = TextEditingController();
+
   List<TextEditingController> itens = [];
   Tipolista dropdownValue = Tipolista.lembrete;
 
@@ -44,25 +45,34 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
     );
   }
 
-  handleSubmit() {
-    //aqui manda validar todos os texts form field dentro dele
+  void handleSubmit() {
     final isValido = _formKey.currentState!.validate();
     if (isValido) {
-      final item = (AfazerCheckListEntity(
-        dataFim: DateTime.now(),
-        dataInicio: DateTime.now(),
-        titulo: _titleController.text,
+      final item = AfazerEntity(
         uuid: 'xpto',
-      ));
+        titulo: _titleController.text,
+        dataInicio: DateTime.now(),
+        dataFim: DateTime.now(),
+        conteudos: [],
+      );
+
+      bool valid = false;
       if (dropdownValue == Tipolista.tarefa) {
-        final isTarefaValidas = _formKeyTarefas.currentState!.validate();
-        if (isTarefaValidas) {
-          for (final value in itens)
-            item.conteudo!.add(AfazerEntity(titulo: value.text));
+        final isTarefasValidas = _formKeyTarefas.currentState!.validate();
+        if (isTarefasValidas) {
+          valid = true;
+          for (final value in itens) {
+            item.conteudos!.add(AfazerChecklistEntity(titulo: value.text));
+          }
         }
+      } else {
+        valid = true;
       }
-      widget.callback(item);
-      Navigator.pop(context);
+
+      if (valid) {
+        widget.callback(item);
+        Navigator.pop(context);
+      }
     }
   }
 
@@ -77,8 +87,8 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
 
   @override
   void initState() {
-    _titleController.text = 'Digite';
     super.initState();
+    _titleController.text = '';
   }
 
   @override
@@ -140,7 +150,7 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
           Form(
               key: _formKeyTarefas,
               child: Column(
-                children: [itens.map(defaultCheckItem).toList()],
+                children: itens.map(defaultCheckItem).toList(),
               )),
         const SpacerComponent(),
         ElevatedButton(onPressed: handleSubmit, child: const Text('Cadastrar'))

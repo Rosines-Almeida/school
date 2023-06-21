@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:school/components/spacer_component.dart';
-import 'package:school/entidades/afazer_checklist_entity.dart';
+import 'package:school/entidades/afazer_entity.dart';
 import 'package:school/pages/home/components/item_widget.dart';
 import 'package:school/pages/home/components/novo_item_widget.dart';
 
@@ -14,7 +14,7 @@ class AfazeresTab extends StatefulWidget {
 }
 
 class _AfazeresTabState extends State<AfazeresTab> {
-  late List<AfazerCheckListEntity> _listAfazeres;
+  late List<AfazerEntity> _listAfazeres;
 
   void handleAdicionar() {
     showDialog(
@@ -58,14 +58,14 @@ class _AfazeresTabState extends State<AfazeresTab> {
   @override
   void initState() {
     _listAfazeres = [
-      AfazerCheckListEntity(
+      AfazerEntity(
         uuid: 'testes1',
         titulo: 'testes1 ',
         dataInicio: DateTime.now(),
         dataFim: DateTime.now(),
         isConcluido: false,
       ),
-      AfazerCheckListEntity(
+      AfazerEntity(
         uuid: 'testes 2',
         titulo: 'testes 2 ',
         dataInicio: DateTime.now(),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:school/components/icon_button_component.dart';
 import 'package:school/components/spacer_component.dart';
-import 'package:school/entidades/afazer_checklist_entity.dart';
+import 'package:school/entidades/afazer_entity.dart';
 
 class ItemWidget extends StatelessWidget {
-  final AfazerCheckListEntity item;
+  final AfazerEntity item;
   final Function() onPressed;
   const ItemWidget({
     super.key,
