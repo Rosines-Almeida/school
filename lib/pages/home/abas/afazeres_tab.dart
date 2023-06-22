@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:school/components/spacer_component.dart';
 import 'package:school/entidades/afazer_entity.dart';
 import 'package:school/pages/home/components/item_widget.dart';
 import 'package:school/pages/home/components/novo_item_widget.dart';
+import 'package:school/providers/afazer_provider.dart';
 
 class AfazeresTab extends StatefulWidget {
   const AfazeresTab({
@@ -14,8 +16,8 @@ class AfazeresTab extends StatefulWidget {
 }
 
 class _AfazeresTabState extends State<AfazeresTab> {
-  late List<AfazerEntity> _listAfazeres;
-
+  late List<AfazerEntity> _listAfazeres = [];
+  late AfazerProvider store;
   void handleAdicionar() {
     showDialog(
         context: context,
@@ -33,18 +35,6 @@ class _AfazeresTabState extends State<AfazeresTab> {
             ],
           );
         });
-    // final item = (AfazerCheckListEntity(
-    //   uuid: 'teste 3',
-    //   titulo: 'teste 3',
-    //   dataInicio: DateTime.now(),
-    //   dataFim: DateTime.now(),
-    //   isConcluido: false,
-    // ));
-    // _listAfazeres.add(item);
-
-    // setState(() {
-    //   _listAfazeres = _listAfazeres;
-    // });
   }
 
   void handleExcluir(index) {
@@ -78,6 +68,7 @@ class _AfazeresTabState extends State<AfazeresTab> {
 
   @override
   Widget build(BuildContext context) {
+    store = Provider.of<AfazerProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

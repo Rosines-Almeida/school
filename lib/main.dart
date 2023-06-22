@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:school/providers/root_provider.dart';
 import 'app_widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: RootProvider.providers(),
+    child: const MyApp(),
+  ));
 }

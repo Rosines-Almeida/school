@@ -3,6 +3,7 @@ import 'package:school/components/icon_button_component.dart';
 import 'package:school/components/spacer_component.dart';
 import 'package:school/entidades/afazer_entity.dart';
 import 'package:school/entidades/afazer_checklist_entity.dart';
+import 'package:uuid/uuid.dart';
 
 class NovoItemWidget extends StatefulWidget {
   final void Function(AfazerEntity item) callback;
@@ -49,27 +50,27 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
     final isValido = _formKey.currentState!.validate();
     if (isValido) {
       final item = AfazerEntity(
-        uuid: 'xpto',
+        uuid: const Uuid().v4(),
         titulo: _titleController.text,
         dataInicio: DateTime.now(),
         dataFim: DateTime.now(),
         conteudos: [],
       );
 
-      bool valid = false;
+      bool isValidFormTarefas = false;
       if (dropdownValue == Tipolista.tarefa) {
         final isTarefasValidas = _formKeyTarefas.currentState!.validate();
         if (isTarefasValidas) {
-          valid = true;
+          isValidFormTarefas = true;
           for (final value in itens) {
             item.conteudos!.add(AfazerChecklistEntity(titulo: value.text));
           }
         }
       } else {
-        valid = true;
+        isValidFormTarefas = true;
       }
 
-      if (valid) {
+      if (isValidFormTarefas) {
         widget.callback(item);
         Navigator.pop(context);
       }
