@@ -9,14 +9,13 @@ class AfazerService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String listJson = jsonEncode(item);
 
-    print(listJson);
     await prefs.setString(_keyAfazer, listJson);
   }
 
   Future<List<AfazerEntity>> buscar() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? listJson = prefs.getString(_keyAfazer);
-    print(listJson);
+
     if (listJson != null) {
       return AfazerEntity.fromJsonList(jsonDecode(listJson));
     }

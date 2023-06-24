@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:school/app_routes.dart';
 import 'package:school/components/spacer_component.dart';
 import 'package:school/entidades/afazer_entity.dart';
 import 'package:school/pages/home/components/item_widget.dart';
-import 'package:school/pages/home/components/novo_item_widget.dart';
 import 'package:school/providers/afazer_provider.dart';
 
 class AfazeresTab extends StatefulWidget {
@@ -16,87 +16,43 @@ class AfazeresTab extends StatefulWidget {
 }
 
 class _AfazeresTabState extends State<AfazeresTab> {
-  late List<AfazerEntity> _listAfazeres = [];
+  // late List<AfazerEntity> _listAfazeres = [];
   late AfazerProvider store;
-  void handleAdicionar() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            children: [
-              NovoItemWidget(
-                callback: (item) {
-                  _listAfazeres.add(item);
-                  setState(() {
-                    _listAfazeres = _listAfazeres;
-                  });
-                },
-              ),
-            ],
-          );
-        });
-  }
 
   void handleExcluir(index) {
-    _listAfazeres.removeAt(index);
+    store.removerItemAfazer(index);
+  }
 
-    setState(() {
-      _listAfazeres = _listAfazeres;
-    });
+  void onDetalhes(AfazerEntity item, int idx) {
+    Navigator.pushNamed(context, AppRoutes.detalhe);
   }
 
   @override
   void initState() {
-    _listAfazeres = [
-      AfazerEntity(
-        uuid: 'testes1',
-        titulo: 'testes1 ',
-        dataInicio: DateTime.now(),
-        dataFim: DateTime.now(),
-        isConcluido: false,
-      ),
-      AfazerEntity(
-        uuid: 'testes 2',
-        titulo: 'testes 2 ',
-        dataInicio: DateTime.now(),
-        dataFim: DateTime.now(),
-        isConcluido: true,
-      ),
-    ];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     store = Provider.of<AfazerProvider>(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ElevatedButton(
-            onPressed: handleAdicionar, child: const Text('Adcionar')),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 400,
-          child: ListView.builder(
-              itemCount: _listAfazeres.length,
-              itemBuilder: (context, index) {
-                final item = _listAfazeres.elementAt(index);
-                return Dismissible(
-                  key: Key(item.uuid),
-                  onDismissed: (direction) {
-                    if (direction == DismissDirection.startToEnd) {
-                      handleExcluir(index);
-                    }
-                  },
-                  child: ItemWidget(
-                    item: item,
-                    onPressed: handleAdicionar,
-                  ),
-                );
-              }),
-        ),
-        const SpacerComponent(),
-      ],
-    );
+    return ListView.builder(
+        itemCount: store.listaAfazeres.length,
+        itemBuilder: (context, index) {
+          final item = store.listaAfazeres.elementAt(index);
+          return Dismissible(
+            key: Key(item.uuid),
+            onDismissed: (direction) {
+              if (direction == DismissDirection.startToEnd) {
+                handleExcluir(index);
+              }
+            },
+            child: ItemWidget(
+              item: item,
+              onPressed: () {
+                onDetalhes(item, index);
+              },
+            ), //todo
+          );
+        });
   }
 }

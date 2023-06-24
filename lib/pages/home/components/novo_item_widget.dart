@@ -17,12 +17,14 @@ class NovoItemWidget extends StatefulWidget {
   State<NovoItemWidget> createState() => _NovoItemWidgetState();
 }
 
-enum Tipolista { lembrete, tarefa }
+enum Tipolista {
+  lembrete,
+  tarefa,
+}
 
 class _NovoItemWidgetState extends State<NovoItemWidget> {
   final _formKey = GlobalKey<FormState>();
   final _formKeyTarefas = GlobalKey<FormState>();
-
   final _titleController = TextEditingController();
 
   List<TextEditingController> itens = [];
@@ -32,7 +34,8 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
     return CheckboxListTile(
       title: TextFormField(
         controller: controller,
-        decoration: const InputDecoration(hintText: 'Digite '),
+        decoration:
+            const InputDecoration(hintText: 'Digite um nome para tarefa'),
         validator: (value) {
           return (value == null || value.isEmpty)
               ? 'Por favor digite um valor'
@@ -101,7 +104,7 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
           children: [
             const Text(
               'Tipo de Lista',
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: 18),
             ),
             const SpacerComponent(
               isFull: true,
@@ -128,6 +131,7 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
         ),
         TextFormField(
           controller: _titleController,
+          decoration: const InputDecoration(hintText: 'Digite um nome'),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Por favor digite um nome';
