@@ -5,7 +5,7 @@ class AfazerEntity {
   final String titulo;
   final DateTime dataInicio;
   final DateTime dataFim;
-  final bool? isConcluido;
+  late final bool? isConcluido;
   final List<AfazerChecklistEntity?> conteudos;
   String? image;
 

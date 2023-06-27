@@ -7,6 +7,8 @@ class AfazerProvider with ChangeNotifier {
   final service = AfazerService();
   List<AfazerEntity> _listAfazeres = [];
 
+  AfazerEntity? _selecionado;
+
   AfazerProvider() {
     buscarAfazeres();
   }
@@ -14,11 +16,22 @@ class AfazerProvider with ChangeNotifier {
     listaAfazeres = await service.buscar();
   }
 
-  List<AfazerEntity> get listaAfazeres => _listAfazeres;
+  List<AfazerEntity> get listaAfazeres {
+    return _listAfazeres;
+  }
 
-  void atualizarItemAfazer(int index, String img) {
-    listaAfazeres.elementAt(index).image = img;
+  set selecionado(AfazerEntity? val) {
+    _selecionado = val;
     notifyListeners();
+  }
+
+  AfazerEntity? get selecionado => _selecionado;
+
+  void atualizarItemAfazer(int index) {
+    if (selecionado != null) {
+      _listAfazeres[index] = selecionado!;
+      notifyListeners();
+    }
   }
 
   set listaAfazeres(List<AfazerEntity> value) {

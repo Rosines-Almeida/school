@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:school/providers/afazer_provider.dart';
+import 'package:school/providers/config_provider.dart';
 
 //arquivo para gerenciar providers
 class RootProvider {
@@ -8,6 +9,7 @@ class RootProvider {
     return [
       //criar instancia do provider
       ChangeNotifierProvider(create: (_) => AfazerProvider()),
+      ChangeNotifierProvider(create: (_) => ConfigProvider()),
     ];
   }
 }

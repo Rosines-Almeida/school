@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:school/components/icon_button_component.dart';
 import 'package:school/components/spacer_component.dart';
+import 'package:school/providers/afazer_provider.dart';
+import 'package:school/providers/config_provider.dart';
 
-class PerfilTab extends StatelessWidget {
+class PerfilTab extends StatefulWidget {
   const PerfilTab({super.key});
 
   @override
+  State<PerfilTab> createState() => _PerfilTabState();
+}
+
+class _PerfilTabState extends State<PerfilTab> {
+  late AfazerProvider store;
+  late ConfigProvider storeConfig;
+
+  @override
   Widget build(BuildContext context) {
+    store = Provider.of<AfazerProvider>(context);
+    storeConfig = Provider.of<ConfigProvider>(context);
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -44,12 +57,23 @@ class PerfilTab extends StatelessWidget {
             const Divider(),
             const Text('Minhas estatisticas'),
             const SpacerComponent(),
-            const Row(
-              children: [Icon(Icons.list), Text('Total de notas: 0')],
+            Row(
+              children: [
+                Icon(Icons.list),
+                Text('Total de notas:'),
+                Text(store.listaAfazeres.length.toString()),
+              ],
             ),
             const SpacerComponent(),
             const Row(
-              children: [Icon(Icons.check), Text('Concluidas: 0')],
+              children: [
+                Icon(Icons.check),
+                Text('Concluidas: '),
+                Text(store.listaAfazeres
+                    .where((element) => element.isConcluido == true)
+                    .length
+                    .toString())
+              ],
             ),
             const SpacerComponent(),
             const Divider(),

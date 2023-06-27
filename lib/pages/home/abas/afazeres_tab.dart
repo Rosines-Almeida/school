@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:school/app_routes.dart';
-import 'package:school/components/spacer_component.dart';
 import 'package:school/entidades/afazer_entity.dart';
 import 'package:school/pages/home/components/item_widget.dart';
 import 'package:school/providers/afazer_provider.dart';
@@ -24,7 +23,8 @@ class _AfazeresTabState extends State<AfazeresTab> {
   }
 
   void onDetalhes(AfazerEntity item, int idx) {
-    Navigator.pushNamed(context, AppRoutes.detalhe);
+    store.selecionado = item;
+    Navigator.pushNamed(context, AppRoutes.detalhe, arguments: idx);
   }
 
   @override
