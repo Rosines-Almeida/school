@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:school/entidades/afazer_entity.dart';
-import 'package:school/pages/home/components/novo_item_widget.dart';
 import 'package:school/services/afazer_service.dart';
+
+import '../pages/home/components/novo_item_widget.dart';
 
 class AfazerProvider with ChangeNotifier {
   final service = AfazerService();
-  List<AfazerEntity> _listAfazeres = [];
-
+  List<AfazerEntity> _listaAfazeres = [];
   AfazerEntity? _selecionado;
+  int? _idx;
 
   AfazerProvider() {
     buscarAfazeres();
   }
+
   buscarAfazeres() async {
     listaAfazeres = await service.buscar();
   }
 
-  List<AfazerEntity> get listaAfazeres {
-    return _listAfazeres;
+  List<AfazerEntity> get listaAfazeres => _listaAfazeres;
+
+  AfazerEntity? get selecionado {
+    return _selecionado;
   }
 
   set selecionado(AfazerEntity? val) {
@@ -25,18 +29,21 @@ class AfazerProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  AfazerEntity? get selecionado => _selecionado;
+  set idx(int val) {
+    _idx = val;
+    notifyListeners();
+  }
 
-  void atualizarItemAfazer(int index) {
+  void atualizarItemAfazer(int idx) {
     if (selecionado != null) {
-      _listAfazeres[index] = selecionado!;
+      _listaAfazeres[idx] = _selecionado!;
       notifyListeners();
     }
   }
 
-  set listaAfazeres(List<AfazerEntity> value) {
-    _listAfazeres = value;
-    service.salvar(_listAfazeres);
+  set listaAfazeres(List<AfazerEntity> val) {
+    _listaAfazeres = val;
+    service.salvar(_listaAfazeres);
     notifyListeners();
   }
 
@@ -44,26 +51,21 @@ class AfazerProvider with ChangeNotifier {
     listaAfazeres.removeAt(index);
     service.salvar(listaAfazeres);
     notifyListeners();
-
-    // setState(() {
-    //   _listAfazeres = _listAfazeres;
-    // });
   }
 
   void abrirModalCadastro(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            children: [
-              NovoItemWidget(
-                callback: (item) {
-                  //desesturando desta forma o nov item adcionad fica na frente
-                  listaAfazeres = [item, ...listaAfazeres];
-                },
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          contentPadding: const EdgeInsets.all(16),
+          children: [
+            NovoItemWidget(callback: (item) {
+              listaAfazeres = [item, ...listaAfazeres];
+            }),
+          ],
+        );
+      },
+    );
   }
 }

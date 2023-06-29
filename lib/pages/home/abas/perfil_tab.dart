@@ -59,24 +59,24 @@ class _PerfilTabState extends State<PerfilTab> {
             const SpacerComponent(),
             Row(
               children: [
-                Icon(Icons.list),
-                Text('Total de notas:'),
+                const Icon(Icons.list),
+                const Text('Total de notas:'),
                 Text(store.listaAfazeres.length.toString()),
               ],
             ),
             const SpacerComponent(),
-            const Row(
+            Row(
               children: [
-                Icon(Icons.check),
-                Text('Concluidas: '),
+                const Icon(Icons.check),
+                const Text('Concluidas: '),
                 Text(store.listaAfazeres
                     .where((element) => element.isConcluido == true)
                     .length
-                    .toString())
+                    .toString()),
               ],
             ),
             const SpacerComponent(),
-            const Divider(),
+            const SpacerComponent(isHorizontal: true, isFull: true),
             const SpacerComponent(),
             const Text("Configurações"),
             const SpacerComponent(),
@@ -86,7 +86,18 @@ class _PerfilTabState extends State<PerfilTab> {
                 const SpacerComponent(
                   isFull: true,
                 ),
-                Switch(value: true, onChanged: (value) {}),
+                Switch(
+                    value: storeConfig.tema == ThemeMode.light,
+                    onChanged: (value) {
+                      storeConfig.tema =
+                          value ? ThemeMode.light : ThemeMode.dark;
+                    }),
+                Switch(
+                  value: storeConfig.tema == ThemeMode.light,
+                  onChanged: (val) {
+                    storeConfig.tema = val ? ThemeMode.light : ThemeMode.light;
+                  },
+                ),
               ],
             )
           ]),
