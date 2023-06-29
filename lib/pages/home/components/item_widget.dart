@@ -14,7 +14,7 @@ class ItemWidget extends StatelessWidget {
 
   Widget status() {
     final icon = item.isConcluido == true ? Icons.done_all : Icons.done;
-    final color = item.isConcluido == true ? Colors.green : Colors.grey[800];
+    final color = item.isConcluido == true ? Colors.green : Colors.grey[400];
     return Icon(icon, color: color);
   }
 

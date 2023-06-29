@@ -66,7 +66,7 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
         if (isTarefasValidas) {
           isValidFormTarefas = true;
           for (final value in itens) {
-            item.conteudos!.add(AfazerChecklistEntity(titulo: value.text));
+            item.conteudos.add(AfazerChecklistEntity(titulo: value.text));
           }
         }
       } else {
@@ -148,7 +148,10 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
                 isFull: true,
               ),
               IconButtonComponent(
-                  onPressed: addItem, iconSize: 16, icon: Icons.add),
+                onPressed: addItem,
+                iconSize: 16,
+                icon: Icons.add,
+              ),
             ],
           ),
         if (dropdownValue == Tipolista.tarefa)
@@ -158,7 +161,10 @@ class _NovoItemWidgetState extends State<NovoItemWidget> {
                 children: itens.map(defaultCheckItem).toList(),
               )),
         const SpacerComponent(),
-        ElevatedButton(onPressed: handleSubmit, child: const Text('Cadastrar'))
+        ElevatedButton(
+          onPressed: handleSubmit,
+          child: const Text('Cadastrar'),
+        )
       ]),
     );
   }

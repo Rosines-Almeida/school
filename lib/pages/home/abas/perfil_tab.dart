@@ -20,6 +20,7 @@ class _PerfilTabState extends State<PerfilTab> {
   Widget build(BuildContext context) {
     store = Provider.of<AfazerProvider>(context);
     storeConfig = Provider.of<ConfigProvider>(context);
+
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -60,6 +61,7 @@ class _PerfilTabState extends State<PerfilTab> {
             Row(
               children: [
                 const Icon(Icons.list),
+                const SizedBox(width: 8),
                 const Text('Total de notas:'),
                 Text(store.listaAfazeres.length.toString()),
               ],
@@ -67,7 +69,8 @@ class _PerfilTabState extends State<PerfilTab> {
             const SpacerComponent(),
             Row(
               children: [
-                const Icon(Icons.check),
+                const Icon(Icons.list),
+                const SizedBox(width: 8),
                 const Text('Concluidas: '),
                 Text(store.listaAfazeres
                     .where((element) => element.isConcluido == true)
@@ -78,24 +81,21 @@ class _PerfilTabState extends State<PerfilTab> {
             const SpacerComponent(),
             const SpacerComponent(isHorizontal: true, isFull: true),
             const SpacerComponent(),
-            const Text("Configurações"),
+            const Text(
+              'Minhas estatísticas',
+              style: TextStyle(fontSize: 18),
+            ),
             const SpacerComponent(),
             Row(
               children: [
                 const Text('Tema escuro'),
                 const SpacerComponent(
-                  isFull: true,
+                  isHorizontal: true,
                 ),
                 Switch(
-                    value: storeConfig.tema == ThemeMode.light,
-                    onChanged: (value) {
-                      storeConfig.tema =
-                          value ? ThemeMode.light : ThemeMode.dark;
-                    }),
-                Switch(
-                  value: storeConfig.tema == ThemeMode.light,
+                  value: storeConfig.tema == ThemeMode.dark,
                   onChanged: (val) {
-                    storeConfig.tema = val ? ThemeMode.light : ThemeMode.light;
+                    storeConfig.tema = val ? ThemeMode.dark : ThemeMode.light;
                   },
                 ),
               ],

@@ -27,7 +27,6 @@ class _DetalhePageState extends State<DetalhePage> {
       final base64 = pickerService.base64(await image.readAsBytes());
       store.selecionado!.image = base64;
       store.atualizarItemAfazer(idx!);
-      //todo
     }
   }
 
@@ -71,8 +70,10 @@ class _DetalhePageState extends State<DetalhePage> {
   Widget build(BuildContext context) {
     store = Provider.of<AfazerProvider>(context);
     if (store.selecionado == null) {
-      return Text('Selecione um item da lista');
+      Navigator.of(context).pop();
+      return const Text('Selecione um item da lista');
     }
+
     return BodyComponent(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(0),

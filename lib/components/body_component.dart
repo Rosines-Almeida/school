@@ -26,7 +26,7 @@ class BodyComponent extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         alignment: Alignment.topCenter,
-        margin: margin,
+        margin: margin ?? const EdgeInsets.all(18),
         padding: padding ?? const EdgeInsets.only(top: 8),
         //medidas que o box tem, desta forma não estora a view port
         constraints: BoxConstraints(

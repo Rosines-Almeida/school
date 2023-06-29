@@ -15,10 +15,9 @@ class AfazeresTab extends StatefulWidget {
 }
 
 class _AfazeresTabState extends State<AfazeresTab> {
-  // late List<AfazerEntity> _listAfazeres = [];
   late AfazerProvider store;
 
-  void handleExcluir(index) {
+  void handleExcluir(int index) {
     store.removerItemAfazer(index);
   }
 
@@ -35,6 +34,7 @@ class _AfazeresTabState extends State<AfazeresTab> {
   @override
   Widget build(BuildContext context) {
     store = Provider.of<AfazerProvider>(context);
+
     return ListView.builder(
         itemCount: store.listaAfazeres.length,
         itemBuilder: (context, index) {
@@ -51,7 +51,7 @@ class _AfazeresTabState extends State<AfazeresTab> {
               onPressed: () {
                 onDetalhes(item, index);
               },
-            ), //todo
+            ),
           );
         });
   }

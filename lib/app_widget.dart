@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: storeConfig.tema,
       theme: MyTheme.claro,
       darkTheme: MyTheme.escuro,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

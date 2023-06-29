@@ -40,16 +40,16 @@ class DetalheHeaderWidget extends StatelessWidget {
             right: 0,
             left: 0,
             child: Container(
+              width: double.infinity,
+              color: const Color.fromARGB(219, 255, 193, 7),
               child: Text(
                 item.titulo,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
-              width: double.infinity,
-              color: const Color.fromARGB(219, 255, 193, 7),
             )),
         Positioned(
           bottom: 18,
@@ -57,7 +57,7 @@ class DetalheHeaderWidget extends StatelessWidget {
           //todo: add icon
           child: IconButtonComponent(
             onPressed: onEdit,
-            icon: Icons.add,
+            icon: Icons.edit,
             iconSize: 24,
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:school/components/app_bar_component.dart';
 import 'package:school/components/body_component.dart';
 import 'package:school/pages/home/abas/afazeres_tab.dart';
 import 'package:school/pages/home/abas/perfil_tab.dart';
@@ -46,12 +45,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BodyComponent(
       margin: const EdgeInsets.all(0),
-      padding: EdgeInsets.all(0),
-      child: _conteudo.elementAt(abaSelecionada),
+      padding: const EdgeInsets.all(0),
       bar: BottomNavigationBar(
-        onTap: (value) {
-          updateIndex(value);
-        },
+        onTap: updateIndex,
         currentIndex: abaSelecionada,
         items: _abas,
       ),
@@ -61,6 +57,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
+      child: _conteudo.elementAt(abaSelecionada),
     );
   }
 }

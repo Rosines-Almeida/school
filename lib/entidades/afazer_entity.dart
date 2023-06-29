@@ -1,12 +1,12 @@
 import 'package:school/entidades/afazer_checklist_entity.dart';
 
 class AfazerEntity {
-  final String uuid;
-  final String titulo;
-  final DateTime dataInicio;
-  final DateTime dataFim;
-  late final bool? isConcluido;
-  final List<AfazerChecklistEntity?> conteudos;
+  String uuid;
+  String titulo;
+  DateTime dataInicio;
+  DateTime dataFim;
+  bool? isConcluido;
+  List<AfazerChecklistEntity?> conteudos;
   String? image;
 
   AfazerEntity({
@@ -24,7 +24,7 @@ class AfazerEntity {
       'uuid': uuid,
       'titulo': titulo,
       'dataInicio': dataInicio.microsecondsSinceEpoch,
-      'dataFim': dataInicio.microsecondsSinceEpoch,
+      'dataFim': dataFim.microsecondsSinceEpoch,
       'isConcluido': isConcluido,
       'conteudos': conteudos,
       if (image != null) 'image': image,
@@ -38,7 +38,7 @@ class AfazerEntity {
       dataInicio: DateTime.fromMicrosecondsSinceEpoch(json['dataInicio']),
       dataFim: DateTime.fromMicrosecondsSinceEpoch(json['dataFim']),
       isConcluido: json['isConcluido'],
-      // conteudos: AfazerChecklistEntity.fromJsonList([json['conteudos']]),
+      conteudos: AfazerChecklistEntity.fromJsonList(json['conteudos']),
       image: json['image'],
     );
   }

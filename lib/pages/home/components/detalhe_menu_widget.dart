@@ -9,6 +9,7 @@ class DetalheMenuWidget extends StatelessWidget {
   final AfazerEntity item;
   final Function() onDone;
   final Function() onDelete;
+
   const DetalheMenuWidget({
     Key? key,
     required this.item,

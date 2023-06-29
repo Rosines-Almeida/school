@@ -14,12 +14,12 @@ class DetalheItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       CheckboxListTile(
-        value: item?.isChecked,
-        onChanged: onChanged,
         title: Text(item?.titulo ?? 'sem titulo'),
         contentPadding: const EdgeInsets.all(0),
-        //ajuda no alinhamento
         controlAffinity: ListTileControlAffinity.leading,
+        value: item?.isChecked,
+        onChanged: onChanged,
+        //ajuda no alinhamento
       )
     ]);
   }
