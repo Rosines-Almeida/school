@@ -1,4 +1,4 @@
-# TODO list school 
+# Todo List   
 Projeto realizado durante a school MJV flutter.
 
 ## Tecnologias Utilizadas
